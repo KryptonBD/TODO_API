@@ -1,6 +1,6 @@
 const express = require('express');
 const { check, validationResult } = require('express-validator');
-const mongodb = require('./db');
+const mongodb = require('./config/db');
 const router = express.Router();
 
 /**
@@ -9,11 +9,10 @@ const router = express.Router();
  * @access Public
  * */
 router.post('/projects', (req, res) => {
-    const db = mongodb.getDb();
-    const result = db.collection('projects').aggregate([
+    const result =  mongodb.db().collection('projects').aggregate([
         {
             $match: {
-                dueDate: new Date().getTime()
+                dueDate: req.body.dueDate
             }
         }
     ]).toArray();
@@ -26,16 +25,15 @@ router.post('/projects', (req, res) => {
 });
 
 /**
- * @route GET aggregeator/tasks
+ * @route POST aggregeator/tasks
  * @desc tasks with dueDate today
  * @access Public
  * */
-router.get('/tasks', (req, res) => {
-    const db = mongodb.getDb();
-    const result = db.collection('tasks').aggregate([
+router.post('/tasks', (req, res) => {
+    const result = mongodb.db().collection('tasks').aggregate([
         {
             $match: {
-                dueDate: new Date()
+                dueDate: req.body.dueDate
             }
         }
     ]).toArray();

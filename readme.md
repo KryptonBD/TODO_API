@@ -284,3 +284,48 @@ npm run server
                 "dueDate": "23/09/2022"
             }
         ]
+
+# API usage and endpoints for aggregatiors
+## Get task by due date [POST /aggregators/tasks]
+- Request: Get task by due date
+    - Headers
+        Content-Type: application/json
+
+    - Body
+        {
+            "dueDate": "23/09/2022"
+        }
+    
+- Response: 200 OK
+    - Body
+        [
+            {
+                "title": "Task Title",
+                "description": "Task Description",
+                "startDate": "23/09/2022",
+                "dueDate": "23/09/2022",
+                "status": "pending",
+                "priority": "high",
+                projectId: "5OM3R4ND0M1D"
+            }
+        ]
+## Get project by due date [POST /aggregators/projects]
+- Request: Get project by due date
+    - Headers
+        Content-Type: application/json
+
+    - Body
+        {
+            "dueDate": "23/09/2022"
+        }
+    
+- Response: 200 OK
+    - Body
+        [
+            {
+                "title": "Project Title",
+                "description": "Project Description",
+                "startDate": "23/09/2022",
+                "dueDate": "23/09/2022"
+            }
+        ]
